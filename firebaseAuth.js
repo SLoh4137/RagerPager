@@ -1,3 +1,4 @@
+
 firebase.auth().signInAnonymously().catch(function(error) {
   // Handle Errors here.
   var errorCode = error.code;
@@ -42,18 +43,16 @@ function addToFirebase(pos) {
 
 function loadMap(maps) {
   //5 minutes before current time.
-  var startTime = new Date().getTime() - (60 * 1 * 1000);
+  var startTime = new Date().getTime() - (60 * 30 * 1000);
 
   // Reference to the clicks in Firebase.
  var locations = firebase.database().ref('locations');
 
  console.log('loadMap');
  // Remove old clicks.
- locations.orderByChild("timestamp").endAt(startTime).on('child_added',
-   function(snapshot) {
-     console.log('snapshot');
-     console.log(snapshot);
-     //snapshot.ref().remove();
+ var old = locations.orderByChild("timestamp").endAt(startTime);
+ var listener = old.on('child_added', function(snapshot) {
+     snapshot.ref.remove();
    }
  );
 
