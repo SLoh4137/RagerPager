@@ -19,7 +19,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   // ...
 });
 
-function addToFirebase(pos) {
+function addToFirebase(pos, comment) {
   var currId = firebase.auth().currentUser.uid;
   var ref = firebase.database().ref('locations');
   var newPostKey = new Date().getTime();
@@ -62,16 +62,4 @@ function loadMap(map) {
    };
     createMarker(map, pos);
  });
-
-/*
- var addPoints = locations.on('child_added', function(data) {
-   var value = data.val();
-   var pos = {
-     lat: value.lat,
-     lng: value.lng
-   };
-    createMarker(map, pos);
- });
- */
-
 }
