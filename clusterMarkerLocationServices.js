@@ -4,6 +4,8 @@
 // locate you.
 
 
+
+
 function CenterControl(controlDiv, map, pos) {
       // Set CSS for the control border.
       var controlUI = document.createElement('div');
@@ -36,6 +38,37 @@ function CenterControl(controlDiv, map, pos) {
   }
 
 
+var markers=[];
+var markerCluster;
+var styleNum;
+
+
+ var clusterStyles = [
+  {
+    textColor: 'black',
+    url: 'images/m1.png',
+	height: 59,
+	width: 48,
+	anchor: [-16, 0],
+
+  },
+ {
+    textColor: 'black',
+    url: 'images/m2.png',
+	height: 89,
+	width: 72,
+	anchor: [-16, 0],
+
+  },
+ {
+    textColor: 'black',
+    url: 'images/m3.png',
+	height: 118,
+	width: 96,
+	anchor: [-16, 0],
+
+  }
+];
 
 function initMap() {
 
@@ -63,6 +96,18 @@ function initMap() {
 
       centerControlDiv.index = 1;
       map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+	  
+	  styleNum=0;
+	  // Add a marker clusterer to manage the markers.
+        markerCluster = new MarkerClusterer(map, markers,
+            {
+			zoomOnClick:false,
+			styles: clusterStyles,
+			
+			}
+			);
+
+
 
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
@@ -73,6 +118,8 @@ function initMap() {
   }
 
 
+  
+	
 }
 
 function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -95,6 +142,10 @@ function createMarker(map, pos) {
 	icon: fire,
   });
   marker.addListener('click', toggleBounce);
+  markers.push(marker);
+  
+  addToCluster(map, marker);
+  
 
 }
 
@@ -106,3 +157,17 @@ function toggleBounce() {
     marker.setAnimation(google.maps.Animation.BOUNCE);
   }
 }
+
+function addToCluster(map, marker) {
+	markerCluster.addMarker(marker, false);
+	
+	if(markerCluster.getTotalMarkers()>9) {
+		styleNum=1;
+	}
+	else if (markerCluster.getTotalMarkers()>20) {
+		styleNum=2;
+	}
+		
+}
+
+
