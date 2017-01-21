@@ -1,16 +1,5 @@
-// Initialize Firebase
- var config = {
-   apiKey: "AIzaSyDhMCei2tnEjkk2xTDXu4FbYmhIXZ5W4UQ",
-   authDomain: "rager-pager.firebaseapp.com",
-   databaseURL: "https://rager-pager.firebaseio.com",
-   storageBucket: "rager-pager.appspot.com",
-   messagingSenderId: "11273059241"
- };
- firebase.initializeApp(config);
+var itslitButton = document.getElementById('itslit');
 
-/**
-* Data object to be written to Firebase.
-*/
 var data = {
   sender: null,
   timestamp: null,
@@ -18,10 +7,37 @@ var data = {
   lng: null
 };
 
+firebase.auth().signInAnonymously().catch(function(error) {
+  // Handle Errors here.
+  var errorCode = error.code;
+  var errorMessage = error.message;
+  // ...
+});
+
+firebase.auth().onAuthStateChanged(function(user) {
+  if (user) {
+    // User is signed in.
+    console.log("Signed in");
+    var isAnonymous = user.isAnonymous;
+    var uid = user.uid;
+    
+  } else {
+    // User is signed out.
+    // ...
+  }
+  // ...
+});
+
+/**
+* Data object to be written to Firebase.
+*/
+
+
+
 /**
 * Starting point for running the program. Authenticates the user.
 * @param {function()} onAuthSuccess - Called when authentication succeeds.
-*/
+*
 function initAuthentication(onAuthSuccess) {
   firebase.authAnonymously(function(error, authData) {
     if (error) {
@@ -32,12 +48,12 @@ function initAuthentication(onAuthSuccess) {
     }
   }, {remember: 'sessionOnly'});  // Users will get a new id for every session.
 }
-
+*/
 /**
  * Set up a Firebase with deletion on clicks older than expirySeconds
  * @param {!google.maps.visualization.HeatmapLayer} heatmap The heatmap to
  * which points are added from Firebase.
- */
+ *
 function initFirebase(heatmap) {
 
   // 10 minutes before current time.
@@ -79,13 +95,13 @@ function initFirebase(heatmap) {
     heatmapData.removeAt(i);
   });
 }
-
+*/
 /**
  * Updates the last_message/ path with the current timestamp.
  * @param {function(Date)} addClick After the last message timestamp has been updated,
  *     this function is called with the current timestamp to add the
  *     click to the firebase.
- */
+ *
 function getTimestamp(addClick) {
   // Reference to location for saving the last click time.
   var ref = firebase.child('last_message/' + data.sender);
@@ -105,12 +121,12 @@ function getTimestamp(addClick) {
     }
   });
 }
-
+*/
 /**
  * Adds a click to firebase.
  * @param {Object} data The data to be added to firebase.
  *     It contains the lat, lng, sender and timestamp.
- */
+ *
 function addToFirebase(data) {
   getTimestamp(function(timestamp) {
     // Add the new timestamp to the record data.
@@ -122,3 +138,4 @@ function addToFirebase(data) {
     });
   });
 }
+*/
