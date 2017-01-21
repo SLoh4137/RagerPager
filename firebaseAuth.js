@@ -1,12 +1,3 @@
-var itslitButton = document.getElementById('itslit');
-
-var data = {
-  sender: null,
-  timestamp: null,
-  lat: null,
-  lng: null
-};
-
 firebase.auth().signInAnonymously().catch(function(error) {
   // Handle Errors here.
   var errorCode = error.code;
@@ -20,13 +11,53 @@ firebase.auth().onAuthStateChanged(function(user) {
     console.log("Signed in");
     var isAnonymous = user.isAnonymous;
     var uid = user.uid;
-    
+
   } else {
     // User is signed out.
     // ...
   }
   // ...
 });
+
+function addToFirebase(pos) {
+  var currId = firebase.auth().currentUser.uid;
+  var ref = firebase.database().ref('locations');
+  //var newPostKey = ref.push().key;
+  var newPostKey = new Date().getTime();
+  ref.onDisconnect().remove();
+
+  var data = {
+    user: currId,
+    timestamp: newPostKey,
+    lat: pos.lat,
+    lng: pos.lng
+  };
+  console.log("data made");
+
+  var updates = {};
+  updates['/locations/' + newPostKey] = data;
+
+  return firebase.database().ref().update(updates);
+}
+
+function loadMap(maps) {
+  //5 minutes before current time.
+  var startTime = new Date().getTime() - (60 * 1 * 1000);
+
+  // Reference to the clicks in Firebase.
+ var locations = firebase.database().ref('locations');
+
+ console.log('loadMap');
+ // Remove old clicks.
+ locations.orderByChild("timestamp").endAt(startTime).on('child_added',
+   function(snapshot) {
+     console.log('snapshot');
+     console.log(snapshot);
+     //snapshot.ref().remove();
+   }
+ );
+
+}
 
 /**
 * Data object to be written to Firebase.
@@ -55,25 +86,19 @@ function initAuthentication(onAuthSuccess) {
  * which points are added from Firebase.
  *
 function initFirebase(heatmap) {
-
   // 10 minutes before current time.
   var startTime = new Date().getTime() - (60 * 10 * 1000);
-
   // Reference to the clicks in Firebase.
   var clicks = firebase.child('clicks');
-
   // Listener for when a click is added.
   clicks.orderByChild('timestamp').startAt(startTime).on('child_added',
     function(snapshot) {
-
       // Get that click from firebase.
       var newPosition = snapshot.val();
       var point = new google.maps.LatLng(newPosition.lat, newPosition.lng);
       var elapsed = new Date().getTime() - newPosition.timestamp;
-
       // Add the point to  the heatmap.
       heatmap.getData().push(point);
-
       // Requests entries older than expiry time (10 minutes).
       var expirySeconds = Math.max(60 * 10 * 1000 - elapsed, 0);
       // Set client timeout to remove the point after a certain time.
@@ -83,7 +108,6 @@ function initFirebase(heatmap) {
       }, expirySeconds);
     }
   );
-
   // Remove old data from the heatmap when a point is removed from firebase.
   clicks.on('child_removed', function(snapshot, prevChildKey) {
     var heatmapData = heatmap.getData();
@@ -105,9 +129,7 @@ function initFirebase(heatmap) {
 function getTimestamp(addClick) {
   // Reference to location for saving the last click time.
   var ref = firebase.child('last_message/' + data.sender);
-
   ref.onDisconnect().remove();  // Delete reference from firebase on disconnect.
-
   // Set value to timestamp.
   ref.set(Firebase.ServerValue.TIMESTAMP, function(err) {
     if (err) {  // Write to last message was unsuccessful.

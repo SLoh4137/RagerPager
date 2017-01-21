@@ -3,7 +3,6 @@
 // failed.", it means you probably did not give permission for the browser to
 // locate you.
 
-
 function CenterControl(controlDiv, map, pos) {
       // Set CSS for the control border.
       var controlUI = document.createElement('div');
@@ -28,8 +27,13 @@ function CenterControl(controlDiv, map, pos) {
       controlText.innerHTML = 'It\'s Lit!';
       controlUI.appendChild(controlText);
 
-      // Setup the click event listeners: simply set the map to Chicago.
-      controlUI.addEventListener('click', function() {
+      // Setup the click event listeners
+      controlUI.addEventListener('click', function(map) {
+        /**
+        * Data object to be written to Firebase.
+        */
+        console.log('click');
+        addToFirebase(pos);
         createMarker(map, pos);
       });
 
@@ -41,7 +45,7 @@ function initMap() {
 
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 0, lng: 0},
-    zoom: 10
+    zoom: 18
   });
 
   var infoWindow = new google.maps.InfoWindow({map: map});
@@ -63,7 +67,7 @@ function initMap() {
 
       centerControlDiv.index = 1;
       map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
-
+      loadMap();
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -85,11 +89,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 var marker;
 function createMarker(map, pos) {
+  var fire = 'images/Fire.png';
   marker = new google.maps.Marker({
     position: pos,
     map: map,
 	animation: google.maps.Animation.DROP,
-    title: 'It\'s Lit!'
+    title: 'It\'s Lit!',
+    icon: fire,
   });
   marker.addListener('click', toggleBounce);
 
