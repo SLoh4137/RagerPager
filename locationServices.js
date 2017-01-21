@@ -46,6 +46,7 @@ function CenterControl(controlDiv, map, pos) {
 
       }
 
+/*
 function makeInfoBox(controlDiv, map) {
   // Set CSS for the control border.
   var controlUI = document.createElement('div');
@@ -67,7 +68,7 @@ function makeInfoBox(controlDiv, map) {
   controlText.textContent = 'The map shows all clicks made in the last 10 minutes.';
   controlUI.appendChild(controlText);
 }
-
+*/
 /**
 * Starting point for running the program. Authenticates the user.
 * @param {function()} onAuthSuccess - Called when authentication succeeds.
@@ -104,9 +105,12 @@ function initMap() {
 
   // Create the DIV to hold the control and call the makeInfoBox() constructor
   // passing in this DIV.
+
+  /*
   var infoBoxDiv = document.createElement('div');
   makeInfoBox(infoBoxDiv, map);
   map.controls[google.maps.ControlPosition.TOP_CENTER].push(infoBoxDiv);
+  */
 
   var infoWindow = new google.maps.InfoWindow({map: map});
 
@@ -123,6 +127,12 @@ function initMap() {
       //data.lat = pos.lat;
       //data.lng = pos.lng;
       //addToFirebase(data);
+
+      var centerControlDiv = document.createElement('div');
+        var centerControl = new CenterControl(centerControlDiv, map, pos);
+
+        centerControlDiv.index = 1;
+        map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -137,12 +147,6 @@ function initMap() {
                         'Error: The Geolocation service failed.' :
                         'Error: Your browser doesn\'t support geolocation.');
   }
-
-  var centerControlDiv = document.createElement('div');
-    var centerControl = new CenterControl(centerControlDiv, map, pos);
-
-    centerControlDiv.index = 1;
-    map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
 
   // Listen for clicks and add the location of the click to firebase.
@@ -168,6 +172,9 @@ function createMarker(map, pos) {
     map: map,
     title: 'Its Lit!'
   });
+  data.lat = pos.lat;
+  data.lng = pos.lng;
+  addToFirebase(data);
 }
 
 /**
