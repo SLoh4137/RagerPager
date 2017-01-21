@@ -47,16 +47,25 @@ var styleNum;
   {
     textColor: 'black',
     url: 'images/m1.png',
+	height: 59,
+	width: 48,
+	anchor: [-16, 0],
 
   },
  {
     textColor: 'black',
     url: 'images/m2.png',
+	height: 89,
+	width: 72,
+	anchor: [-16, 0],
 
   },
  {
     textColor: 'black',
     url: 'images/m3.png',
+	height: 118,
+	width: 96,
+	anchor: [-16, 0],
 
   }
 ];
@@ -92,9 +101,9 @@ function initMap() {
 	  // Add a marker clusterer to manage the markers.
         markerCluster = new MarkerClusterer(map, markers,
             {
-			imagePath: 'images/m',
-			minimumClusterSize: 15,
+			zoomOnClick:false,
 			styles: clusterStyles,
+			
 			}
 			);
 
