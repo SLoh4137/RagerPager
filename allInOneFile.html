@@ -98,6 +98,10 @@ function createMarker(map, pos) {
 	icon: fire,
   });
   marker.addListener('click', toggleBounce);
+  //send to firebase
+	console.log('click');
+	//addToFirebase(pos);
+  	addToFirebase(pos, document.getElementById('comment').value);
 
 }
 
@@ -111,11 +115,9 @@ function toggleBounce() {
 }
 
 function buttonClick() {
+   	//reset elements in the comment box
 	document.getElementById('comment').placeholder = 'Type comment here.';
 	document.getElementById('comment').value = '';
-	console.log('click');
-    addToFirebase(pos);
-    window.alert("button clicked");
 }
 
 </script>
