@@ -66,11 +66,6 @@ function initMap() {
       centerControlDiv.index = 1;
       map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
 
-	/*var marker = new google.maps.Marker({
-    position: pos,
-    map: map,
-    title: 'Its Lit!'
-  });*/
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -92,7 +87,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 var marker;
 function createMarker(map, pos) {
-	var marker = new google.maps.Marker({
+  marker = new google.maps.Marker({
     position: pos,
     map: map,
 	animation: google.maps.Animation.DROP,
