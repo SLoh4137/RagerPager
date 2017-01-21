@@ -28,7 +28,7 @@ function CenterControl(controlDiv, map, pos) {
       controlUI.appendChild(controlText);
 
       // Setup the click event listeners
-      controlUI.addEventListener('click', function(map) {
+      controlUI.addEventListener('click', function() {
         /**
         * Data object to be written to Firebase.
         */
@@ -67,7 +67,7 @@ function initMap() {
 
       centerControlDiv.index = 1;
       map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
-      loadMap();
+      loadMap(map);
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
