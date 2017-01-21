@@ -4,6 +4,39 @@
 // locate you.
 
 
+function CenterControl(controlDiv, map, pos) {
+
+        // Set CSS for the control border.
+        var controlUI = document.createElement('div');
+        controlUI.style.backgroundColor = '#fff';
+        controlUI.style.border = '2px solid #fff';
+        controlUI.style.borderRadius = '3px';
+        controlUI.style.boxShadow = '0 2px 6px rgba(0,0,0,.3)';
+        controlUI.style.cursor = 'pointer';
+        controlUI.style.marginBottom = '22px';
+        controlUI.style.textAlign = 'center';
+        controlUI.title = 'Click to recenter the map';
+        controlDiv.appendChild(controlUI);
+
+        // Set CSS for the control interior.
+        var controlText = document.createElement('div');
+        controlText.style.color = 'rgb(25,25,25)';
+        controlText.style.fontFamily = 'Roboto,Arial,sans-serif';
+        controlText.style.fontSize = '16px';
+        controlText.style.lineHeight = '38px';
+        controlText.style.paddingLeft = '5px';
+        controlText.style.paddingRight = '5px';
+        controlText.innerHTML = 'CreateMarker';
+        controlUI.appendChild(controlText);
+
+        // Setup the click event listeners: simply set the map to Chicago.
+        controlUI.addEventListener('click', function() {
+          createMarker(map, pos);
+        });
+
+      }
+
+
 
 function initMap() {
 	
@@ -12,6 +45,7 @@ function initMap() {
     center: {lat: 0, lng: 0},
     zoom: 10
   });
+   
   var infoWindow = new google.maps.InfoWindow({map: map});
 
   // Try HTML5 geolocation.
@@ -26,11 +60,17 @@ function initMap() {
       infoWindow.setContent('Location found.');
       map.setCenter(pos);
 	  
-	var marker = new google.maps.Marker({
+	  var centerControlDiv = document.createElement('div');
+      var centerControl = new CenterControl(centerControlDiv, map, pos);
+
+      centerControlDiv.index = 1;
+      map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+	  
+	/*var marker = new google.maps.Marker({
     position: pos,
     map: map,
-    title: 'Hello World!'
-  });
+    title: 'Its Lit!'
+  });*/
     }, function() {
       handleLocationError(true, infoWindow, map.getCenter());
     });
@@ -48,3 +88,30 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                         'Error: The Geolocation service failed.' :
                         'Error: Your browser doesn\'t support geolocation.');
 }
+
+function createMarker(map, pos) {
+	 /* if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(function(position) {
+      var pos = {
+        lat: position.coords.latitude,
+        lng: position.coords.longitude
+      };
+
+      infoWindow.setPosition(pos);
+      infoWindow.setContent('Location found.');
+      map.setCenter(pos);*/
+	  
+	var marker = new google.maps.Marker({
+    position: pos,
+    map: map,
+    title: 'Its Lit!'
+  });
+    /*}, function() {
+      handleLocationError(true, infoWindow, map.getCenter());
+    });
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+  }*/
+}
+
