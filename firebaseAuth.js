@@ -24,10 +24,10 @@ function addToFirebase(pos, comment) {
   var ref = firebase.database().ref('locations');
   var newPostKey = new Date().getTime();
   var data = {
-    user: currId,
     timestamp: newPostKey,
     lat: pos.lat,
-    lng: pos.lng
+    lng: pos.lng,
+    comment: comment
   };
 
   var updateRef = firebase.database().ref('locations/' + newPostKey);

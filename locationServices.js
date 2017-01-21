@@ -50,22 +50,25 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                         'Error: Your browser doesn\'t support geolocation.');
 }
 
-var marker;
 function createMarker(map, pos) {
   console.log("called");
 	var fire = 'images/Fire.png';
-  marker = new google.maps.Marker({
+  var marker = new google.maps.Marker({
     position: pos,
     map: map,
 	  animation: google.maps.Animation.DROP,
     title: 'It\'s Lit!',
 	   icon: fire,
   });
-  marker.addListener('click', toggleBounce);
+  marker.addListener('click', toggleBounce(marker));
 
 }
 
-function toggleBounce() {
+function dropFlame(map, pos) {
+
+}
+
+function toggleBounce(marker) {
   if (marker.getAnimation() !== null) {
     marker.setAnimation(null);
   } else {
