@@ -98,6 +98,38 @@
         makeInfoBox(infoBoxDiv, map);
         map.controls[google.maps.ControlPosition.TOP_CENTER].push(infoBoxDiv);
 
+        var infoWindow = new google.maps.InfoWindow({map: map});
+
+        if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(function(position) {
+            var pos = {
+              lat: position.coords.latitude,
+              lng: position.coords.longitude
+            };
+
+            infoWindow.setPosition(pos);
+            infoWindow.setContent('Location found.');
+            map.setCenter(pos);
+            data.lat = pos.lat;
+            data.lng = pos.lng;
+            addToFirebase(data);
+          }, function() {
+            handleLocationError(true, infoWindow, map.getCenter());
+          });
+        } else {
+          // Browser doesn't support Geolocation
+          handleLocationError(false, infoWindow, map.getCenter());
+        }
+
+        function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+          infoWindow.setPosition(pos);
+        infoWindow.setContent(browserHasGeolocation ?
+                              'Error: The Geolocation service failed.' :
+                              'Error: Your browser doesn\'t support geolocation.');
+        }
+
+
+
         // Listen for clicks and add the location of the click to firebase.
         map.addListener('click', function(e) {
           data.lat = e.latLng.lat();
