@@ -26,11 +26,7 @@ function CenterControl(controlDiv, map, pos) {
         controlText.style.lineHeight = '38px';
         controlText.style.paddingLeft = '5px';
         controlText.style.paddingRight = '5px';
-<<<<<<< HEAD
         controlText.innerHTML = 'It\'s Lit!';
-=======
-        controlText.innerHTML = 'It\'s Lit';
->>>>>>> origin/master
         controlUI.appendChild(controlText);
 
         // Setup the click event listeners: simply set the map to Chicago.
@@ -96,21 +92,14 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 var marker;
 function createMarker(map, pos) {
-<<<<<<< HEAD
-
-	  
-	marker = new google.maps.Marker({
-=======
 	var marker = new google.maps.Marker({
->>>>>>> origin/master
     position: pos,
     map: map,
 	animation: google.maps.Animation.DROP,
     title: 'It\'s Lit!'
   });
-<<<<<<< HEAD
   marker.addListener('click', toggleBounce);
-    
+
 }
 
 
@@ -121,8 +110,3 @@ function toggleBounce() {
     marker.setAnimation(google.maps.Animation.BOUNCE);
   }
 }
-
-
-=======
-}
->>>>>>> origin/master
