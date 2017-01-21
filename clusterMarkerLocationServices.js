@@ -32,7 +32,8 @@ function CenterControl(controlDiv, map, pos) {
 
       // Setup the click event listeners: simply set the map to Chicago.
       controlUI.addEventListener('click', function() {
-        createMarker(map, pos);
+			createMarker(map, pos);
+       
       });
 
   }
@@ -96,6 +97,8 @@ function initMap() {
 
       centerControlDiv.index = 1;
       map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
+	  
+	  
 	  
 	  styleNum=0;
 	  // Add a marker clusterer to manage the markers.
