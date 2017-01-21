@@ -26,7 +26,11 @@ function CenterControl(controlDiv, map, pos) {
         controlText.style.lineHeight = '38px';
         controlText.style.paddingLeft = '5px';
         controlText.style.paddingRight = '5px';
+<<<<<<< HEAD
         controlText.innerHTML = 'It\'s Lit!';
+=======
+        controlText.innerHTML = 'It\'s Lit';
+>>>>>>> origin/master
         controlUI.appendChild(controlText);
 
         // Setup the click event listeners: simply set the map to Chicago.
@@ -39,13 +43,13 @@ function CenterControl(controlDiv, map, pos) {
 
 
 function initMap() {
-	
-	
+
+
   var map = new google.maps.Map(document.getElementById('map'), {
     center: {lat: 0, lng: 0},
     zoom: 10
   });
-   
+
   var infoWindow = new google.maps.InfoWindow({map: map});
 
   // Try HTML5 geolocation.
@@ -59,13 +63,13 @@ function initMap() {
       infoWindow.setPosition(pos);
       infoWindow.setContent('Location found.');
       map.setCenter(pos);
-	  
+
 	  var centerControlDiv = document.createElement('div');
       var centerControl = new CenterControl(centerControlDiv, map, pos);
 
       centerControlDiv.index = 1;
       map.controls[google.maps.ControlPosition.TOP_CENTER].push(centerControlDiv);
-	  
+
 	/*var marker = new google.maps.Marker({
     position: pos,
     map: map,
@@ -78,7 +82,7 @@ function initMap() {
     // Browser doesn't support Geolocation
     handleLocationError(false, infoWindow, map.getCenter());
   }
-  
+
 
 }
 
@@ -92,14 +96,19 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 var marker;
 function createMarker(map, pos) {
+<<<<<<< HEAD
 
 	  
 	marker = new google.maps.Marker({
+=======
+	var marker = new google.maps.Marker({
+>>>>>>> origin/master
     position: pos,
     map: map,
 	animation: google.maps.Animation.DROP,
     title: 'It\'s Lit!'
   });
+<<<<<<< HEAD
   marker.addListener('click', toggleBounce);
     
 }
@@ -114,3 +123,6 @@ function toggleBounce() {
 }
 
 
+=======
+}
+>>>>>>> origin/master
