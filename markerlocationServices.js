@@ -85,11 +85,14 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
 var marker;
 function createMarker(map, pos) {
+	
+	var fire = 'https://ragerpager.me/images/Fire.png';
   marker = new google.maps.Marker({
     position: pos,
     map: map,
 	animation: google.maps.Animation.DROP,
-    title: 'It\'s Lit!'
+    title: 'It\'s Lit!',
+	icon: fire,
   });
   marker.addListener('click', toggleBounce);
 
