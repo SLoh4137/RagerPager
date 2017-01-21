@@ -29,7 +29,7 @@ function addToFirebase(pos) {
     lat: pos.lat,
     lng: pos.lng
   };
-  
+
   var updateRef = firebase.database().ref('locations/' + newPostKey);
   updateRef.update(data);
 }
@@ -55,20 +55,23 @@ function loadMap(map) {
  var pointsToAdd = ordered.startAt(cutoff).limitToLast(1);
 
  var pointsListener = pointsToAdd.on('child_added', function(data) {
+   var value = data.val();
    var pos = {
-     lat: data.lat,
-     lng: data.lng
+     lat: value.lat,
+     lng: value.lng
    };
     createMarker(map, pos);
  });
 
- var pointsListener = locations.on('child_added', function(data) {
-   console.log("point");
+/*
+ var addPoints = locations.on('child_added', function(data) {
+   var value = data.val();
    var pos = {
-     lat: data.lat,
-     lng: data.lng
+     lat: value.lat,
+     lng: value.lng
    };
     createMarker(map, pos);
  });
+ */
 
 }
