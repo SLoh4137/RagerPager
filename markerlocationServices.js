@@ -26,7 +26,7 @@ function CenterControl(controlDiv, map, pos) {
         controlText.style.lineHeight = '38px';
         controlText.style.paddingLeft = '5px';
         controlText.style.paddingRight = '5px';
-        controlText.innerHTML = 'CreateMarker';
+        controlText.innerHTML = 'It\'s Lit!';
         controlUI.appendChild(controlText);
 
         // Setup the click event listeners: simply set the map to Chicago.
@@ -89,29 +89,28 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
                         'Error: Your browser doesn\'t support geolocation.');
 }
 
-function createMarker(map, pos) {
-	 /* if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
 
-      infoWindow.setPosition(pos);
-      infoWindow.setContent('Location found.');
-      map.setCenter(pos);*/
+var marker;
+function createMarker(map, pos) {
+
 	  
-	var marker = new google.maps.Marker({
+	marker = new google.maps.Marker({
     position: pos,
     map: map,
-    title: 'Its Lit!'
+	animation: google.maps.Animation.DROP,
+    title: 'It\'s Lit!'
   });
-    /*}, function() {
-      handleLocationError(true, infoWindow, map.getCenter());
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, map.getCenter());
-  }*/
+  marker.addListener('click', toggleBounce);
+    
 }
+
+
+function toggleBounce() {
+  if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
+}
+
 
