@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script src="firebaseAuth.js"></script>
 <script>
 
 var map;
@@ -92,6 +93,14 @@ function toggleBounce() {
   $("#responses").modal();
 }
 
+function buttonClick() {
+	document.getElementById('comment').placeholder = 'Type comment here.';
+	document.getElementById('comment').value = '';
+	console.log('click');
+    addToFirebase(pos);
+    window.alert("button clicked");
+}
+
 </script>
 
     <style>
@@ -133,7 +142,7 @@ function toggleBounce() {
 
   <body>
 
-  	<div class="front_panel"><button type="button" class="btn-primary btn-block btn btn-lg" data-toggle="modal" data-target="#myModal" onClick="document.getElementById('comment').placeholder = 'Type comment here.';document.getElementById('comment').value = '';"> It's Lit!</button></div>
+  	<div class="front_panel"><button type="button" class="btn-primary btn-block btn btn-lg" data-toggle="modal" data-target="#myModal" onClick="buttonClick()"> It's Lit!</button></div>
 
   	<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
