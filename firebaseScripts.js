@@ -155,8 +155,8 @@ function updateClustering(marker) {
 	}
 }
 
-function callUber() {
-
+function callUberButton() {
+  //Go to https://www.usebutton.com/ for our wonderful button use! 
 }
 
 function getComments() {
