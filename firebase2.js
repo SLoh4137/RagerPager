@@ -102,13 +102,12 @@ function updateMap() {
 
   //Listens for when flames get added to the list flamesToAdd
   var flameListener = flamesToAdd.on('child_added', function(data) {
-    console.log("call1231231213ed");
     var value = data.val();
     var posToAdd = {
       lat: value.lat,
       lng: value.lng
     };
-    console.log("called");
+
     dropFlame(posToAdd);
  });
 }
