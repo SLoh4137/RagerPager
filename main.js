@@ -54,7 +54,6 @@ function initMap() {
 
 function itsLit() {
   addFlame(pos);
-  dropFlame(pos);
 }
 
 function dropFlame(pos) {
