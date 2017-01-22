@@ -97,7 +97,7 @@ function addComment(pos, comment) {
 }
 
 function updateMap() {
-  var timeBeforeCutOff = (60 * 15 * 1000)
+  var timeBeforeCutOff = (60 * 60 * 15 * 1000)
   //30 minutes before current time
   var startTime = new Date().getTime();
   var cutoff = startTime - timeBeforeCutOff;
@@ -144,10 +144,10 @@ function updateClustering(marker) {
   flameCluster.addMarker(marker, false);
 
 	if(flameCluster.getTotalMarkers() > 9) {
-		styleNum=1;
+		styleNum = 1;
 	}
 	else if (flameCluster.getTotalMarkers() > 20) {
-		styleNum=2;
+		styleNum = 2;
 	}
 }
 
