@@ -42,14 +42,14 @@ function initMap() {
    google.maps.event.addListener(flameCluster, "click", function(c) {
       var mar = c.getMarkers();
       var commentStrings = [];
-      for (var i = 0; i < mar.length; i++ ){
+      for (var i = 0; i < mar.length; i++){
         var comment = getComment(mar[i].timestamp);
         if(comment != null) {
           commentStrings.push(comment);
         }
       }
       console.log(commentStrings);
-      flameClick();
+      flameClick(commentStrings);
    });
   }
 
@@ -81,24 +81,29 @@ function dropFlame(pos, timestamp) {
   updateClustering(marker);
 }
 
-function flameClick() {
+function flameClick(commentStrings) {
   document.getElementById('comment').placeholder = 'Add comment';
   document.getElementById('comment').value = '';
-  openComments();
+  openComments(commentStrings);
 }
 
-function openComments() {
-  updateComments();
+function openComments(commentStrings) {
+  updateComments(commentStrings);
   $("#myModal").modal();
 }
 
-function updateComments() {
+function updateComments(commentStrings) {
 
    $('#modal_container').empty();
-  var div = document.createElement("div");
-  div.innerHTML = "<p>"+"comment 1"+"</p>";
-  document.getElementById("modal_container").appendChild(div);
-  div.setAttribute('class', 'modal-body');
+
+   for (var j = 0; j < commentStrings.length; j++ ){
+
+      var div = document.createElement("div");
+      div.innerHTML = commentStrings[j];
+      document.getElementById("modal_container").appendChild(div);
+      div.setAttribute('class', 'modal-body');
+
+    };
 
   //alert(thatFlameCluster.distanceBetweenPoints_(thatFlameCluster.getCenter,pos));
   //if(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos)>1) {
