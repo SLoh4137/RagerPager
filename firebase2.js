@@ -78,7 +78,7 @@ function addComment(pos, comment) {
 }
 
 function updateMap() {
-  var timeBeforeCutOff = (60 * 0.25 * 1000)
+  var timeBeforeCutOff = (60 * 15 * 1000)
   //30 minutes before current time
   var startTime = new Date().getTime();
   var cutoff = startTime - timeBeforeCutOff;
@@ -102,7 +102,7 @@ function updateMap() {
       snapshot.ref.remove();
     });
 
-}, 5 * 1000)
+}, 30 * 1000)
 
   //All flamesToAdd including those already in database and those added in real time
   var flamesToAdd = ordered.startAt(cutoff);
