@@ -15,8 +15,6 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-    <script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js">
-      </script>
 
     <script src="https://www.gstatic.com/firebasejs/3.6.6/firebase.js"></script>
     <script src="https://www.gstatic.com/firebasejs/3.6.2/firebase-app.js"></script>
@@ -37,36 +35,32 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCypaO-SNej-CU5zD0m3jIMdvMuiJqZat0&callback=initMap">
     </script>
 
-    <script src="firebase2.js"></script>
-    <script src="main.js"></script>
+  <script src="firebaseAuth.js"></script>
+  <script src="locationServices.js"></script>
 
     <style>
-
-      /*Make the sample fill the entire window*/
+      /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      /* Optional: Makes the sample page fill the window. */
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
+        justify-content: center;
       }
 
-      /* Always set the map height explicitly to define the size of the div element that contains the map. */
-      #map {
-        height: 100%;
-        position:fixed;
-        z-index: 0;
+      .front_panel {
+      	position:fixed;
+      	left: 50%;
+		transform: translateX(-50%);
+		bottom:5%;
+      	width:96%;
+      	z-index:2;
       }
 
-      #logo_pic {
-        position:fixed;
-        left: 50%;
-        transform: translateX(-50%);
-        bottom:5%;
-        width:30%;
-        z-index:2;
-        max-width: 100;
-      }
-
-      /*
       #comment {
       	outline-width: 0;
       	border:none;
@@ -76,7 +70,6 @@
       	width=200px;
       	right:5px;
       }
-      */
 
     </style>
 
@@ -84,30 +77,44 @@
 
   <body>
 
-
-    <!--Map-->
-    <div id="map"></div>
-
-    <!--Flame Button-->
-  	<div><img id = 'logo_pic' src = 'images/RagerPagerLogo.png' onClick='itsLit()'></div>
+  	<div class="front_panel">
+      <button type="button"
+      class="btn-primary btn-block btn btn-lg" onClick="createMarker(map,pos)"> It's Lit!
+      </button>
+    </div>
 
   	<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Comments</h4>
+          <h4 class="modal-title">How Lit?!</h4>
         </div>
         <div class="modal-body">
-          + <input type="text" id="comment">
+          <input type="text" id="comment">
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="submitComment($(comment).value)">Submit</button>
+          <button type="button" class="btn btn-primary" data-dismiss="modal" onclick="createMarker(map,pos)">Submit</button>
         </div>
       </div>
     </div>
   	</div>
 
-  </body>
+  	<div class="modal fade" id="responses" role="dialog">
+    <div class="modal-dialog modal-sm">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Check-ins</h4>
+        </div>
+        <div class="modal-body">
+          Insert check-ins from Firebase here.
+        </div>
+      </div>
+    </div>
+  	</div>
 
+    <div id="map"></div>
+
+  </body>
 </html>
