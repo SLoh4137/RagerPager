@@ -12,6 +12,7 @@ function initMap() {
       },
       streetViewControl: false,
     });
+	map.setOptions({minZoom:6});
 
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
