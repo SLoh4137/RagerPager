@@ -39,7 +39,9 @@ function initMap() {
 			styles: clusterStyles,
 	  });
 
+
    google.maps.event.addListener(flameCluster, "click", function(c) {
+     /*
       var mar = c.getMarkers();
       var commentStrings = [];
       for (var i = 0; i < mar.length; i++ ){
@@ -51,6 +53,9 @@ function initMap() {
       console.log(commentStrings);
       flameClick();
    });
+   */
+   var commentStrings = ["wow so lit", "littest i've ever seen", "my hands are littaly burning"];
+   flameClick(commentStrings);
   }
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
