@@ -96,6 +96,12 @@ function addComment(pos, comment) {
 }
 }
 
+function getComments() {
+  console.log("casas");
+  //console.log(flameCluster.getMarkers());
+  //return flameCluster.getMarkers();
+}
+
 function updateMap() {
   var timeBeforeCutOff = (60 * 60 * 15 * 1000)
   //30 minutes before current time
@@ -140,7 +146,6 @@ function updateMap() {
 //marker is the flame icon that is dropped
 function updateClustering(marker) {
 
-  //Eric what does false mean
   flameCluster.addMarker(marker, false);
 
 	if(flameCluster.getTotalMarkers() > 9) {
