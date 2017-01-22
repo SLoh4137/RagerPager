@@ -60,14 +60,14 @@
         z-index: 0;
       }
 
-      #logo_pic {
+    #logo_pic {
         position:fixed;
         left: 50%;
         transform: translateX(-50%);
         bottom:5%;
-        width:30%;
+        width:auto\9;
         z-index:2;
-        max-width: 100;
+        max-width: 17%;
       }
 
       #comment {
@@ -86,6 +86,23 @@
         border-top-color: #cccccc;
       }
 
+/*      .round-button {
+    width: 10%;
+    height: 10%;
+    padding-bottom: 10%;
+    border-radius: 50%;
+    border: 2px solid #f5f5f5;
+    overflow: hidden;
+    background-image: url('images/RagerPagerLogo.png');
+    box-shadow: 0 0 3px gray;
+    z-index: 2;
+}
+.round-button:hover {
+    background: #262626;
+
+}*/
+
+
     </style>
 
   </head>
@@ -96,8 +113,9 @@
     <!--Map-->
     <div id="map"></div>
 
+    <!--<div class = "round-button" > </div>-->
     <!--Flame Button-->
-  	<div><img id = 'logo_pic' src = 'images/RagerPagerLogo.png' onClick='itsLit()'></div>
+ <div><img id = 'logo_pic' src = 'images/RagerPagerLogo.png' onClick='itsLit()'></div>
 
   	<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
