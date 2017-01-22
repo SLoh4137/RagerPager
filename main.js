@@ -50,12 +50,11 @@ function initMap() {
           commentStrings.push(comment);
         }
       }
+      */
+      var commentStrings = ["wow so lit", "littest i've ever seen", "my hands are littaly burning"];
+      flameClick(commentStrings);
       console.log(commentStrings);
-      flameClick();
    });
-   */
-   var commentStrings = ["wow so lit", "littest i've ever seen", "my hands are littaly burning"];
-   flameClick(commentStrings);
   }
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
