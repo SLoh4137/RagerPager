@@ -34,7 +34,7 @@ function initMap() {
       // Browser doesn't support Geolocation
       handleLocationError(false, infoWindow, map.getCenter());
     }
-    updateMap(map);
+    updateMap();
 
     styleNum=0;
 	  // Add a marker clusterer to manage the markers.

@@ -68,6 +68,7 @@ function addComment(pos, comment) {
   var ref = firebase.database().ref('locations');
   var newKey = new Date().getTime();
   var data = {
+    timestamp: newKey,
     lat: pos.lat,
     lng: pos.lng,
     comment: comment
@@ -84,7 +85,7 @@ function updateMap() {
 
   // Reference to the locations in Firebase
   var locations = firebase.database().ref('locations');
-  var ordered = locations.orderByChild('timestamp');
+  var ordered = locations.orderByChild("timestamp");
 
   // Remove old flames
   // Gets all flames older than the cutoff time
@@ -97,15 +98,17 @@ function updateMap() {
   });
 
   //All flamesToAdd including those already in database and those added in real time
-  var flamesToAdd = ordered.startAt(cutoff).limitToLast(1);
+  var flamesToAdd = ordered.startAt(cutoff);
 
   //Listens for when flames get added to the list flamesToAdd
   var flameListener = flamesToAdd.on('child_added', function(data) {
+    console.log("call1231231213ed");
     var value = data.val();
     var posToAdd = {
       lat: value.lat,
       lng: value.lng
     };
+    console.log("called");
     dropFlame(posToAdd);
  });
 }
