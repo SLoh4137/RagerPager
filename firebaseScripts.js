@@ -38,10 +38,12 @@ firebase.auth().onAuthStateChanged(function(user) {
     console.log("Signed in");
     var isAnonymous = user.isAnonymous;
     var uid = user.uid;
+
     checkEdit();
     window.setInterval(function() {
       checkEdit();
     }, 60 * 5 * 1000);
+
   } else {
     // User is signed out.
     // ...
