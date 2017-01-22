@@ -85,6 +85,7 @@ function openComments() {
 }
 
 function updateComments() {
+  alert(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos));
   if(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos)>1) {
     alert(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos));
     $('#input_div').hide();
