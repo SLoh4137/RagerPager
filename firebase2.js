@@ -91,6 +91,7 @@ function updateMap() {
     var cutoff = new Date().getTime() - timeBeforeCutOff;
     var old = locations.orderByChild("timestamp").endAt(cutoff);
     var listener = old.on('child_added', function(snapshot) {
+      console.log('remove something');
       snapshot.ref.remove();
     });
 
