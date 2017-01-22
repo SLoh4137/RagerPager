@@ -78,10 +78,10 @@ function addComment(pos, comment) {
 }
 
 function updateMap() {
-
+  var timeBeforeCutOff = (60 * 0.5 * 1000)
   //30 minutes before current time
   var startTime = new Date().getTime();
-  var cutoff = startTime - (60 * 30 * 1000);
+  var cutoff = startTime - timeBeforeCutOff;
 
   // Reference to the locations in Firebase
   var locations = firebase.database().ref('locations');
@@ -96,6 +96,13 @@ function updateMap() {
       //Removes reference in the database. Snapshot is a firebase Queue
       snapshot.ref.remove();
   });
+
+  window.setInterval(function() {
+    console.log('called');
+    cutoff = new Date().getTime() - timeBeforeCutOff;
+    old = locations.orderByChild("timestamp").endAt(cutoff);
+    old.ref.remove();
+  }, 30 * 1000)
 
   //All flamesToAdd including those already in database and those added in real time
   var flamesToAdd = ordered.startAt(cutoff);
@@ -119,10 +126,10 @@ function updateClustering(marker) {
   //Eric what does false mean
   flameCluster.addMarker(marker, false);
 
-	if(flameCluster.getTotalMarkers()>9) {
+	if(flameCluster.getTotalMarkers() > 9) {
 		styleNum=1;
 	}
-	else if (flameCluster.getTotalMarkers()>20) {
+	else if (flameCluster.getTotalMarkers() > 20) {
 		styleNum=2;
 	}
 }
