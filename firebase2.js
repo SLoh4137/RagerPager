@@ -1,4 +1,4 @@
-var allFlames[];
+var allFlames = [];
 var flameCluster;
 var clusterStyles = [{
    textColor: 'black',
@@ -55,6 +55,7 @@ function addFlame(pos) {
   var ref = firebase.database().ref('locations');
   var newKey = new Date().getTime();
   var data = {
+    timestamp: newKey,
     lat: pos.lat,
     lng: pos.lng,
     comment: null
@@ -83,7 +84,7 @@ function updateMap() {
 
   // Reference to the locations in Firebase
   var locations = firebase.database().ref('locations');
-  var ordered = locations.orderByKey();
+  var ordered = locations.orderByChild('timestamp');
 
   // Remove old flames
   // Gets all flames older than the cutoff time
@@ -99,7 +100,7 @@ function updateMap() {
   var flamesToAdd = ordered.startAt(cutoff).limitToLast(1);
 
   //Listens for when flames get added to the list flamesToAdd
-  var flameListener = pointsToAdd.on('child_added', function(data) {
+  var flameListener = flamesToAdd.on('child_added', function(data) {
     var value = data.val();
     var posToAdd = {
       lat: value.lat,
@@ -125,5 +126,9 @@ function updateClustering(marker) {
 }
 
 function callUber() {
+
+}
+
+function getComments() {
 
 }
