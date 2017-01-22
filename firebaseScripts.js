@@ -1,7 +1,7 @@
 var allFlames = [];
 var flameCluster;
 var versionNumber = 1;
-var canEdit;
+var canEdit = false;
 var clusterStyles = [{
    textColor: 'black',
    url: 'images/m1.png',
@@ -40,9 +40,8 @@ firebase.auth().onAuthStateChanged(function(user) {
     var uid = user.uid;
     checkEdit();
     window.setInterval(function() {
-
+      checkEdit();
     }, 60 * 5 * 1000);
-    checkEdit();
   } else {
     // User is signed out.
     // ...

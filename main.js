@@ -24,11 +24,11 @@ function initMap() {
         map.setCenter(pos);
 
       }, function() {
-        handleLocationError(true, infoWindow, map.getCenter());
+        handleLocationError(true);
       });
     } else {
       // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
+      handleLocationError(false);
     }
     updateMap();
 
@@ -57,11 +57,12 @@ function initMap() {
    });
   }
 
-  function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-    infoWindow.setPosition(pos);
-    infoWindow.setContent(browserHasGeolocation ?
-                          'Error: The Geolocation service failed.' :
-                          'Error: Your browser doesn\'t support geolocation.');
+  function handleLocationError(browserHasGeolocation) {
+    if(browserHasGeolocation) {
+      console.log("Error: The Geolocation service failed.")
+    } else {
+      console.log("Error: Your browser doesn\'t support geolocation.")
+    }
   }
 
 function itsLit() {
@@ -139,11 +140,11 @@ function updatePosition() {
 		//alert(pos.lng);
 
       }, function() {
-        handleLocationError(true, infoWindow, map.getCenter());
+        handleLocationError(true);
       });
     } else {
       // Browser doesn't support Geolocation
-      handleLocationError(false, infoWindow, map.getCenter());
+      handleLocationError(false);
 	  return null;
     }
 
