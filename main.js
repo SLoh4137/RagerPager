@@ -36,6 +36,13 @@ function initMap() {
     }
     updateMap(map);
 
+    styleNum=0;
+	  // Add a marker clusterer to manage the markers.
+    flameCluster = new MarkerClusterer(map, allFlames, {
+			zoomOnClick:false,
+			styles: clusterStyles,
+	  });
+
   }
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
