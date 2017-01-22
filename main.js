@@ -2,7 +2,6 @@ var map;
 var pos;
 
 function initMap() {
-
     map = new google.maps.Map(document.getElementById('map'), {
       center: {lat: 0, lng: 0},
       zoom: 18,
@@ -39,7 +38,7 @@ function initMap() {
 			zoomOnClick:false,
 			styles: clusterStyles,
 	  });
-	  
+
 	 google.maps.event.addListener(flameCluster, "clusterclick", function () {
 		flameClick();
 	 });
@@ -101,15 +100,15 @@ function updatePosition() {
 
 	if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        
-		
+
+
 		newpos = {
-		
+
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
 		pos=newpos;
-		
+
 		//alert(pos.lat);
 		//alert(pos.lng);
 
