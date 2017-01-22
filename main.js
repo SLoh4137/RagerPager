@@ -13,8 +13,6 @@ function initMap() {
       streetViewControl: false,
     });
 
-    //var infoWindow = new google.maps.InfoWindow({map: map});
-
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
@@ -23,8 +21,6 @@ function initMap() {
           lng: position.coords.longitude
         };
 
-        //infoWindow.setPosition(pos);
-        //infoWindow.setContent('Location found.');
         map.setCenter(pos);
 
       }, function() {
@@ -45,7 +41,6 @@ function initMap() {
 	  
 	 google.maps.event.addListener(flameCluster, "clusterclick", function () {
 		flameClick();
-		alert('MarkerClusterer click event');
 	 });
 
 
@@ -78,11 +73,9 @@ function dropFlame(pos) {
 }
 
 function flameClick() {
-  $(comment).placeholder = 'Add comment';
-  $(comment).value = '';
+  document.getElementById('comment').placeholder = 'Add comment';
+  document.getElementById('comment').value = '';
   openComments();
-
-  
 }
 
 function openComments() {
