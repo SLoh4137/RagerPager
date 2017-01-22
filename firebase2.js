@@ -87,14 +87,6 @@ function updateMap() {
   var locations = firebase.database().ref('locations');
   var ordered = locations.orderByChild("timestamp");
 
-  // Remove old flames
-  // Gets all flames older than the cutoff time
-  var old = ordered.endAt(cutoff).limitToLast(1);
-
-  var listener = old.on('child_added', function(snapshot) {
-    snapshot.ref.remove();
-  });
-
   window.setInterval(function() {
     var cutoff = new Date().getTime() - timeBeforeCutOff;
     var old = locations.orderByChild("timestamp").endAt(cutoff);
@@ -102,7 +94,7 @@ function updateMap() {
       snapshot.ref.remove();
     });
 
-}, 30 * 1000)
+  }, 60 * 1000)
 
   //All flamesToAdd including those already in database and those added in real time
   var flamesToAdd = ordered.startAt(cutoff);
