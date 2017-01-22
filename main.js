@@ -65,17 +65,20 @@ function dropFlame(pos) {
     title: 'It\'s Lit!',
     icon: fire,
   });
+  marker.addListener('click', flameClick);
   allFlames.push(marker);
   updateClustering(marker);
 }
 
 function flameClick() {
   bounceFlame();
+  $(comment).placeholder = 'Add comment';
+  $(comment).value = '';
   openComments();
 }
 
 function openComments() {
-  //open dialog of all comments
+  $("#myModal").modal();
   //if within a certain distance, add comment is an option
   //uber button
 }
