@@ -39,11 +39,15 @@ function initMap() {
 			styles: clusterStyles,
 	  });
 
-	 google.maps.event.addListener(flameCluster, "clusterclick", function () {
-		flameClick();
-	 });
-
-
+   google.maps.event.addListener(flameCluster, "click", function(c) {
+      var mar = c.getMarkers();
+      var commentStrings = [];
+      for (var i = 0; i < mar.length; i++ ){
+        console.log(mar[i]);
+        console.log(getComment(mar[i].timestamp));
+      }
+      flameClick();
+   });
   }
 
   function handleLocationError(browserHasGeolocation, infoWindow, pos) {
@@ -54,20 +58,22 @@ function initMap() {
   }
 
 function itsLit() {
+  var timestamp = new Date().getTime();
 	updatePosition();
-	addFlame(pos);
+	addFlame(pos, timestamp);
 }
 
-function dropFlame(pos) {
+function dropFlame(pos, timestamp) {
   var fire = 'images/Fire.png';
   var marker = new google.maps.Marker({
     position: pos,
     map: map,
+    timestamp: timestamp,
     animation: google.maps.Animation.DROP,
     title: 'It\'s Lit!',
     icon: fire,
   });
-  marker.addListener('click', flameClick);
+  //marker.addListener('click', flameClick);
   allFlames.push(marker);
   updateClustering(marker);
 }
@@ -100,8 +106,8 @@ function updateComments() {
 }
 
 function submitComment(comment) {
-  addComment(pos, comment);
-  updateClustering();
+  var timestamp = new Date().getTime();
+  addComment(pos, comment, timestamp);
 }
 
 function updatePosition() {

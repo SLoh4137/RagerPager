@@ -62,43 +62,35 @@ function checkEdit() {
 * Used in calculation of flame size. For that use equalTo(
 * Ordered by timestamp
 */
-function addFlame(pos) {
+function addFlame(pos, timestamp) {
   if(canEdit) {
   var ref = firebase.database().ref('locations');
-  var newKey = new Date().getTime();
   var data = {
-    timestamp: newKey,
+    timestamp: timestamp,
     lat: pos.lat,
     lng: pos.lng,
     comment: null
   };
 
-  firebase.database().ref('locations/' + newKey).update(data);
+  firebase.database().ref('locations/' + timestamp).update(data);
 } else {
   console.log("No access");
 }
 }
 
-function addComment(pos, comment) {
+function addComment(pos, comment, timestamp) {
   if(canEdit) {
     var ref = firebase.database().ref('locations');
-    var newKey = new Date().getTime();
     var data = {
-      timestamp: newKey,
+      timestamp: timestamp,
       lat: pos.lat,
       lng: pos.lng,
       comment: comment
     };
-    firebase.database().ref('locations/' + newKey).update(data);
+    firebase.database().ref('locations/' + timestamp).update(data);
   } else {
     console.log("No access");
   }
-}
-
-function getComments() {
-  console.log("casas");
-  //console.log(flameCluster.getMarkers());
-  //return flameCluster.getMarkers();
 }
 
 function updateMap() {
@@ -132,12 +124,11 @@ function updateMap() {
   //Listens for when flames get added to the list flamesToAdd
   var flameListener = flamesToAdd.on('child_added', function(data) {
     var value = data.val();
-    var posToAdd = {
-      lat: value.lat,
-      lng: value.lng
-    };
-
-    dropFlame(posToAdd);
+      var posToAdd = {
+        lat: value.lat,
+        lng: value.lng
+      };
+      dropFlame(posToAdd, value.timestamp);
  });
 }
 
@@ -155,10 +146,20 @@ function updateClustering(marker) {
 	}
 }
 
-function callUberButton() {
-  //Go to https://www.usebutton.com/ for our wonderful button use! 
+function getComment(timestamp) {
+  console.log("called")
+  var locations = firebase.database().ref('locations');
+  locations.orderByChild("timestamp").equalTo(timestamp).once('child_added').then(function(snapshot) {
+    if(snapshot.val() == null) {
+      console.log("nothing returned");
+      return null;
+    } else {
+        console.log("something returned");
+      return snapshot.val().comment;
+    }
+  });
 }
 
-function getComments() {
-
+function callUberButton() {
+  //Go to https://www.usebutton.com/ for our wonderful button use!
 }
