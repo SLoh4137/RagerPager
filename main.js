@@ -80,11 +80,17 @@ function flameClick() {
 }
 
 function openComments() {
+  updateComments();
   $("#myModal").modal();
-  //if within a certain distance, add comment is an option
-  //uber button
 }
 
+function updateComments() {
+  if(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos)>1) {
+    alert(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos));
+    $('#input_div').hide();
+  }
+
+}
 
 function submitComment(comment) {
   addComment(pos, comment);
@@ -104,8 +110,8 @@ function updatePosition() {
         };
 		pos=newpos;
 		
-		alert(pos.lat);
-		alert(pos.lng);
+		//alert(pos.lat);
+		//alert(pos.lng);
 
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
