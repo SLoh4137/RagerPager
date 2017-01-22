@@ -85,11 +85,18 @@ function openComments() {
 }
 
 function updateComments() {
-  alert(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos));
-  if(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos)>1) {
-    alert(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos));
-    $('#input_div').hide();
-  }
+
+   $('#modal_container').empty();
+  var div = document.createElement("div");
+  div.innerHTML = "<p>"+"comment 1"+"</p>";
+  document.getElementById("modal_container").appendChild(div);
+  div.setAttribute('class', 'modal-body');
+
+  //alert(thatFlameCluster.distanceBetweenPoints_(thatFlameCluster.getCenter,pos));
+  //if(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos)>1) {
+    //alert(flameCluster.distanceBetweenPoints_(flameCluster.getCenter,pos));
+    //$('#input_div').hide();
+  //}
 
 }
 
