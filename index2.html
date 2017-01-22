@@ -35,28 +35,29 @@
       src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCypaO-SNej-CU5zD0m3jIMdvMuiJqZat0&callback=initMap">
     </script>
 
-  <script src="firebase2.js"></script>
-  <script src="main.js"></script>
+    <script src="firebase2.js"></script>
+    <script src="main.js"></script>
 
     <style>
-      /* Always set the map height explicitly to define the size of the div
-       * element that contains the map. */
-      #map {
-        height: 100%;
-      }
-      /* Optional: Makes the sample page fill the window. */
+
+      /*Make the sample fill the entire window*/
       html, body {
         height: 100%;
         margin: 0;
         padding: 0;
-        justify-content: center;
       }
 
+      /* Always set the map height explicitly to define the size of the div element that contains the map. */
+      #map {
+        height: 100%;
+      }
+      
+      /*
       .front_panel {
       	position:fixed;
       	left: 50%;
-		transform: translateX(-50%);
-		bottom:5%;
+		    transform: translateX(-50%);
+		    bottom:5%;
       	width:96%;
       	z-index:2;
       }
@@ -70,6 +71,7 @@
       	width=200px;
       	right:5px;
       }
+      */
 
     </style>
 
@@ -77,12 +79,15 @@
 
   <body>
 
+    <!--Flame Button-->
   	<div class="front_panel">
-      <button type="button"
-      class="btn-primary btn-block btn btn-lg" onClick="createMarker(map,pos)"> It's Lit!
-      </button>
+      <button type="button" class="btn-primary btn-block btn btn-lg" onClick="createMarker(map,pos)"> It's Lit!</button>
     </div>
 
+    <!--Map-->
+    <div id="map"></div>
+
+    <!--
   	<div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-sm">
       <div class="modal-content">
@@ -113,8 +118,8 @@
       </div>
     </div>
   	</div>
-
-    <div id="map"></div>
+    -->
 
   </body>
+
 </html>

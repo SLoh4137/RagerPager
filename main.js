@@ -13,7 +13,7 @@ function initMap() {
       streetViewControl: false,
     });
 
-    var infoWindow = new google.maps.InfoWindow({map: map});
+    //var infoWindow = new google.maps.InfoWindow({map: map});
 
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -23,8 +23,8 @@ function initMap() {
           lng: position.coords.longitude
         };
 
-        infoWindow.setPosition(pos);
-        infoWindow.setContent('Location found.');
+        //infoWindow.setPosition(pos);
+        //infoWindow.setContent('Location found.');
         map.setCenter(pos);
 
       }, function() {
@@ -49,7 +49,7 @@ function itsLit() {
 
 }
 
-function dropFlame(pos) {
+function dropFlame() {
 
 }
 
