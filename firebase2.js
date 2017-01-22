@@ -1,5 +1,7 @@
 var allFlames = [];
 var flameCluster;
+var versionNumber = 1;
+var canEdit;
 var clusterStyles = [{
    textColor: 'black',
    url: 'images/m1.png',
@@ -36,7 +38,11 @@ firebase.auth().onAuthStateChanged(function(user) {
     console.log("Signed in");
     var isAnonymous = user.isAnonymous;
     var uid = user.uid;
+    checkEdit();
+    window.setInterval(function() {
 
+    }, 60 * 5 * 1000);
+    checkEdit();
   } else {
     // User is signed out.
     // ...
@@ -44,14 +50,20 @@ firebase.auth().onAuthStateChanged(function(user) {
   // ...
 });
 
+function checkEdit() {
+  firebase.database().ref('versionNumber').once('value').then(function(snapshot) {
+    canEdit = (versionNumber == snapshot.val());
+  });
+}
+
 /**
 * Adds a location to firebase
 * Comment is null
 * Used in calculation of flame size. For that use equalTo(
 * Ordered by timestamp
-)
 */
 function addFlame(pos) {
+  if(canEdit) {
   var ref = firebase.database().ref('locations');
   var newKey = new Date().getTime();
   var data = {
@@ -62,9 +74,13 @@ function addFlame(pos) {
   };
 
   firebase.database().ref('locations/' + newKey).update(data);
+} else {
+  console.log("No access");
+}
 }
 
 function addComment(pos, comment) {
+  if(canEdit) {
   var ref = firebase.database().ref('locations');
   var newKey = new Date().getTime();
   var data = {
@@ -75,6 +91,9 @@ function addComment(pos, comment) {
   };
 
   firebase.database().ref('locations/' + newKey).update(data);
+} else {
+  console.log("No access");
+}
 }
 
 function updateMap() {
@@ -87,15 +106,20 @@ function updateMap() {
   var locations = firebase.database().ref('locations');
   var ordered = locations.orderByChild("timestamp");
 
-  window.setInterval(function() {
-    var cutoff = new Date().getTime() - timeBeforeCutOff;
-    var old = locations.orderByChild("timestamp").endAt(cutoff);
+  //window.setInterval(function() {
+    //var cutoff = new Date().getTime() - timeBeforeCutOff;
+    //var old = locations.orderByChild("timestamp").endAt(cutoff).limitToLast(1);
+    var old = ordered.endAt(cutoff).limitToLast(1);
     var listener = old.on('child_added', function(snapshot) {
       console.log('remove something');
+      if(canEdit) {
       snapshot.ref.remove();
+    } else {
+      console.log("No access");
+    }
     });
 
-  }, 60 * 1000)
+  //}, 60 * 1000)
 
   //All flamesToAdd including those already in database and those added in real time
   var flamesToAdd = ordered.startAt(cutoff);
