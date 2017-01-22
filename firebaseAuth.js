@@ -44,7 +44,7 @@ function loadMap(map) {
 
  console.log('loadMap');
 
- // Remove old clicks.
+ // Remove old flames.
  var ordered = locations.orderByChild("timestamp");
  var old = ordered.endAt(cutoff).limitToLast(1);
 
