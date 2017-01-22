@@ -49,11 +49,11 @@ function itsLit() {
 
 }
 
-function flameClick() {
+function dropFlame(pos) {
 
 }
 
-function dropFlame(pos) {
+function flameClick() {
 
 }
 
