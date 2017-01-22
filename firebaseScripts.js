@@ -94,7 +94,7 @@ function addComment(pos, comment, timestamp) {
 }
 
 function updateMap() {
-  var timeBeforeCutOff = (60 * 60 * 15 * 1000)
+  var timeBeforeCutOff = (60 * 30 * 1000)
   //30 minutes before current time
   var startTime = new Date().getTime();
   var cutoff = startTime - timeBeforeCutOff;
