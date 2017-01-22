@@ -42,6 +42,12 @@ function initMap() {
 			zoomOnClick:false,
 			styles: clusterStyles,
 	  });
+	  
+	 google.maps.event.addListener(flameCluster, "clusterclick", function () {
+		flameClick();
+		alert('MarkerClusterer click event');
+	 });
+
 
   }
 
@@ -71,10 +77,11 @@ function dropFlame(pos) {
 }
 
 function flameClick() {
-  bounceFlame();
   $(comment).placeholder = 'Add comment';
   $(comment).value = '';
   openComments();
+
+  
 }
 
 function openComments() {
@@ -83,14 +90,6 @@ function openComments() {
   //uber button
 }
 
-//add automatic stopping
-function bounceFlame() {
-if (marker.getAnimation() !== null) {
-    marker.setAnimation(null);
-  } else {
-    marker.setAnimation(google.maps.Animation.BOUNCE);
-  }
-}
 
 function submitComment(comment) {
   addComment(pos, comment);
