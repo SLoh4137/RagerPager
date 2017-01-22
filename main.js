@@ -46,11 +46,20 @@ function initMap() {
   }
 
 function itsLit() {
-
+  addFlame(pos);
+  dropFlame(pos);
 }
 
-function dropFlame() {
-
+function dropFlame(pos) {
+  var fire = 'images/Fire.png';
+  var marker = new google.maps.Marker({
+    position: pos,
+    map: map,
+    animation: google.maps.Animation.DROP,
+    title: 'It\'s Lit!',
+    icon: fire,
+  });
+  updateClustering(marker);
 }
 
 function flameClick() {
