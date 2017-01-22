@@ -70,36 +70,46 @@
         max-width: 17%;
       }
 
+      .container{
+        position:fixed;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom:5%;
+        width:14%;
+        z-index:2;
+        background: none;
+      }
+
       .button {
         z-index: 2;
         bottom: 5%;
         left: 50%;
         transform: translateX(-50%);
         position:fixed;
-          height: 175px;
-          width: 175px;
-          border-radius: 175px;
+          height: 12vw;
+          width: 12vw;
+          border-radius: 50%;
           border: 1px solid #000;
           background-image: url("images/RagerPagerLogo.png");
           background-size: 115% 115%;
           background-position: center;
-          box-shadow: 0px 0px 20px #000000;
+          box-shadow: 5px 5px 20px #000000;
           outline: none;
           display:block;
 
       }
 
       .button:hover{
-        box-shadow: 0px 0px 35px #000;
+        box-shadow: 0px 0px 30px #000;
       }
 
       .button:active{
         background-color: #968A87;
-        box-shadow:inset;
-        box-shadow: 0px 0px 60px #000;
-        height: 160px;
-        width: 160px;
-        border-radius: 160px;
+        box-shadow: inset 0px 0px 5px #000;
+      /*  box-shadow: 0px 0px 35px #000;*/
+        height: 11vw;
+        width: 11vw;
+        border-radius: 50%;
       }
 
 
