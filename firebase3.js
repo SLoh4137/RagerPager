@@ -81,19 +81,18 @@ function addFlame(pos) {
 
 function addComment(pos, comment) {
   if(canEdit) {
-  var ref = firebase.database().ref('locations');
-  var newKey = new Date().getTime();
-  var data = {
-    timestamp: newKey,
-    lat: pos.lat,
-    lng: pos.lng,
-    comment: comment
-  };
-
-  firebase.database().ref('locations/' + newKey).update(data);
-} else {
-  console.log("No access");
-}
+    var ref = firebase.database().ref('locations');
+    var newKey = new Date().getTime();
+    var data = {
+      timestamp: newKey,
+      lat: pos.lat,
+      lng: pos.lng,
+      comment: comment
+    };
+    firebase.database().ref('locations/' + newKey).update(data);
+  } else {
+    console.log("No access");
+  }
 }
 
 function getComments() {
@@ -119,10 +118,10 @@ function updateMap() {
     var listener = old.on('child_added', function(snapshot) {
       console.log('remove something');
       if(canEdit) {
-      snapshot.ref.remove();
-    } else {
-      console.log("No access");
-    }
+        snapshot.ref.remove();
+      } else {
+        console.log("No access");
+      }
     });
 
   //}, 60 * 1000)
