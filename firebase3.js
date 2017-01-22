@@ -63,20 +63,20 @@ function checkEdit() {
 * Ordered by timestamp
 */
 function addFlame(pos) {
+  getComments();
   if(canEdit) {
-  var ref = firebase.database().ref('locations');
-  var newKey = new Date().getTime();
-  var data = {
-    timestamp: newKey,
-    lat: pos.lat,
-    lng: pos.lng,
-    comment: null
-  };
-
-  firebase.database().ref('locations/' + newKey).update(data);
-} else {
+    var ref = firebase.database().ref('locations');
+    var newKey = new Date().getTime();
+    var data = {
+      timestamp: newKey,
+      lat: pos.lat,
+      lng: pos.lng,
+      comment: null
+    };
+    firebase.database().ref('locations/' + newKey).update(data);
+  } else {
   console.log("No access");
-}
+  }
 }
 
 function addComment(pos, comment) {
@@ -95,11 +95,12 @@ function addComment(pos, comment) {
   }
 }
 
+/*
 function getComments() {
-  console.log("casas");
-  //console.log(flameCluster.getMarkers());
-  //return flameCluster.getMarkers();
+  console.log(flameCluster.getMarkers());
+  console.log(flameCluster.getMarkers()[0]);
 }
+*/
 
 function updateMap() {
   var timeBeforeCutOff = (60 * 60 * 15 * 1000)
@@ -139,6 +140,7 @@ function updateMap() {
 
     dropFlame(posToAdd);
  });
+
 }
 
 
@@ -155,10 +157,22 @@ function updateClustering(marker) {
 	}
 }
 
-function callUber() {
+/*
+function isPosInCluster() {
+  var distance = 40000; // Some large number
+  var clusterToAddTo = null;
+var pos = marker.getPosition();
 
+  for (var i = 0, cluster; cluster = flameCluster.clusters_[i]; i++) {
+    var center = cluster.getCenter();
+    if (center) {
+      var d = this.distanceBetweenPoints_(center, marker.getPosition());
+      if (d < distance) {
+        distance = d;
+        clusterToAddTo = cluster;
+      }
+    }
 }
 
-function getComments() {
-
 }
+*/
