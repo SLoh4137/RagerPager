@@ -78,7 +78,7 @@ function addComment(pos, comment) {
 }
 
 function updateMap() {
-  var timeBeforeCutOff = (60 * 0.5 * 1000)
+  var timeBeforeCutOff = (60 * 30 * 1000)
   //30 minutes before current time
   var startTime = new Date().getTime();
   var cutoff = startTime - timeBeforeCutOff;
@@ -89,19 +89,11 @@ function updateMap() {
 
   // Remove old flames
   // Gets all flames older than the cutoff time
-  var old = ordered.endAt(cutoff).limitToLast(1);
-
-  // Listens for when old flames have been added to the list to remove then removes it
-  var listener = old.on('child_added', function(snapshot) {
-      //Removes reference in the database. Snapshot is a firebase Queue
-      snapshot.ref.remove();
-  });
+  var old = ordered.endAt(cutoff).ref.remove();
 
   window.setInterval(function() {
-    console.log('called');
     cutoff = new Date().getTime() - timeBeforeCutOff;
-    old = locations.orderByChild("timestamp").endAt(cutoff);
-    old.ref.remove();
+    locations.orderByChild("timestamp").endAt(cutoff).ref.remove();
   }, 30 * 1000)
 
   //All flamesToAdd including those already in database and those added in real time
