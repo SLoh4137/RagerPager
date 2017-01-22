@@ -101,14 +101,17 @@ function updatePosition() {
 
 	if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
-        alert(position.coords.latitude);
-		alert(position.coords.longitude);
+        
+		
 		newpos = {
 		
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
 		pos=newpos;
+		
+		alert(pos.lat);
+		alert(pos.lng);
 
       }, function() {
         handleLocationError(true, infoWindow, map.getCenter());
