@@ -59,7 +59,8 @@ function initMap() {
   }
 
 function itsLit() {
-  addFlame(pos);
+	updatePosition();
+	addFlame(pos);
 }
 
 function dropFlame(pos) {
@@ -94,4 +95,28 @@ function openComments() {
 function submitComment(comment) {
   addComment(pos, comment);
   updateClustering();
+}
+
+function updatePosition() {
+
+	if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(function(position) {
+        alert(position.coords.latitude);
+		alert(position.coords.longitude);
+		newpos = {
+		
+          lat: position.coords.latitude,
+          lng: position.coords.longitude
+        };
+		pos=newpos;
+
+      }, function() {
+        handleLocationError(true, infoWindow, map.getCenter());
+      });
+    } else {
+      // Browser doesn't support Geolocation
+      handleLocationError(false, infoWindow, map.getCenter());
+	  return null;
+    }
+
 }
