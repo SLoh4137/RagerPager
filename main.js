@@ -66,17 +66,31 @@ function dropFlame(pos) {
     title: 'It\'s Lit!',
     icon: fire,
   });
+  allFlames.push(marker);
   updateClustering(marker);
 }
 
 function flameClick() {
-
+  bounceFlame();
+  openComments();
 }
 
+function openComments() {
+  //open dialog of all comments
+  //if within a certain distance, add comment is an option
+  //uber button
+}
+
+//add automatic stopping
 function bounceFlame() {
-
+if (marker.getAnimation() !== null) {
+    marker.setAnimation(null);
+  } else {
+    marker.setAnimation(google.maps.Animation.BOUNCE);
+  }
 }
 
-function submitComment() {
-
+function submitComment(comment) {
+  addComment(pos, comment);
+  updateClustering();
 }
