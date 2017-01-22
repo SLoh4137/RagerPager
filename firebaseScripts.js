@@ -147,16 +147,9 @@ function updateClustering(marker) {
 }
 
 function getComment(timestamp) {
-  console.log("called")
   var locations = firebase.database().ref('locations');
   locations.orderByChild("timestamp").equalTo(timestamp).once('child_added').then(function(snapshot) {
-    if(snapshot.val() == null) {
-      console.log("nothing returned");
-      return null;
-    } else {
-        console.log("something returned");
-      return snapshot.val().comment;
-    }
+    return snapshot.val().comment;
   });
 }
 

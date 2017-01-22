@@ -43,9 +43,12 @@ function initMap() {
       var mar = c.getMarkers();
       var commentStrings = [];
       for (var i = 0; i < mar.length; i++ ){
-        console.log(mar[i]);
-        console.log(getComment(mar[i].timestamp));
+        var comment = getComment(mar[i].timestamp);
+        if(comment != null) {
+          commentStrings.push(comment);
+        }
       }
+      console.log(commentStrings);
       flameClick();
    });
   }
