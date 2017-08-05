@@ -35,7 +35,7 @@ firebase.auth().signInAnonymously().catch(function(error) {
 firebase.auth().onAuthStateChanged(function(user) {
   if (user) {
     // User is signed in.
-    console.log("Signed in");
+    //console.log("Signed in");
     var isAnonymous = user.isAnonymous;
     var uid = user.uid;
 
@@ -140,12 +140,14 @@ function updateClustering(marker) {
 
   flameCluster.addMarker(marker, false);
 
+  /*
 	if(flameCluster.getTotalMarkers() > 9) {
 		styleNum = 1;
 	}
 	else if (flameCluster.getTotalMarkers() > 20) {
 		styleNum = 2;
 	}
+    */
 }
 
 function getComment(timestamp) {

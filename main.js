@@ -9,9 +9,11 @@ function initMap() {
       zoomControlOptions: {
           position: google.maps.ControlPosition.TOP_RIGHT
       },
+      minZoom: 6,
+      disableDoubleClickZoom: true,
       streetViewControl: false,
     });
-	map.setOptions({minZoom:6});
+	//map.setOptions({minZoom:6});
 
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -127,16 +129,10 @@ function updatePosition() {
 	if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(position) {
 
-
-		newpos = {
-
+		pos = {
           lat: position.coords.latitude,
           lng: position.coords.longitude
         };
-		pos=newpos;
-
-		//alert(pos.lat);
-		//alert(pos.lng);
 
       }, function() {
         handleLocationError(true);
