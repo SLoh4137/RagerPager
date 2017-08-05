@@ -53,7 +53,7 @@ function initMap() {
       */
       var commentStrings = ["wow so lit", "littest i've ever seen", "my hands are littaly burning"];
       flameClick(commentStrings);
-      console.log(commentStrings);
+//      console.log(commentStrings);
    });
   }
 
@@ -72,14 +72,13 @@ function itsLit() {
 }
 
 function dropFlame(pos, timestamp) {
-  var fire = 'images/Fire.png';
   var marker = new google.maps.Marker({
     position: pos,
     map: map,
     timestamp: timestamp,
     animation: google.maps.Animation.DROP,
     title: 'It\'s Lit!',
-    icon: fire,
+    icon: 'images/Fire.png',
   });
   //marker.addListener('click', flameClick);
   allFlames.push(marker);

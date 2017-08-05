@@ -70,7 +70,7 @@ function addFlame(pos, timestamp) {
     timestamp: timestamp,
     lat: pos.lat,
     lng: pos.lng,
-    comment: null
+    //comment: null
   };
 
   firebase.database().ref('locations/' + timestamp).update(data);
@@ -95,8 +95,9 @@ function addComment(pos, comment, timestamp) {
 }
 
 function updateMap() {
-  var timeBeforeCutOff = (60 * 30 * 1000)
-  //30 minutes before current time
+  var timeBeforeCutOff = (60 * 60 * 2 * 1000)
+  //12 hours before current time
+
   var startTime = new Date().getTime();
   var cutoff = startTime - timeBeforeCutOff;
 
@@ -125,11 +126,11 @@ function updateMap() {
   //Listens for when flames get added to the list flamesToAdd
   var flameListener = flamesToAdd.on('child_added', function(data) {
     var value = data.val();
-      var posToAdd = {
+    var posToAdd = {
         lat: value.lat,
         lng: value.lng
-      };
-      dropFlame(posToAdd, value.timestamp);
+    };
+    dropFlame(posToAdd, value.timestamp);
  });
 }
 
